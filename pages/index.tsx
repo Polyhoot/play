@@ -8,15 +8,15 @@ import type { NextPage } from 'next'
 import styles from '../styles/Home.module.scss'
 import { Button } from 'grommet'
 import { useRouter } from 'next/router'
+import { useStore } from '@nanostores/react'
+import { loginStore, updateGameId, updateName } from '../store/login'
 
 const Home: NextPage = () => {
+  const login = useStore(loginStore)
+
   const router = useRouter()
 
-  const [gamePin, setGamePin] = useState<string>()
-
   const [stage, setStage] = useState<0 | 1>(0)
-
-  const [name, setName] = useState('')
 
   return (
     <Page height={'100%'} background={'brand'} width={'100%'}>
@@ -29,8 +29,8 @@ const Home: NextPage = () => {
           <FormField label={'Enter Your name'} margin={'auto'}>
             <TextInput
               type={'text'}
-              value={name}
-              onInput={(e) => setName((e.target as HTMLInputElement).value)}
+              value={login.name}
+              onInput={(e) => updateName((e.target as HTMLInputElement).value)}
             />
           </FormField>
         ) : (
@@ -38,12 +38,12 @@ const Home: NextPage = () => {
             <TextInput
               pattern={'[0-9]*'}
               type={'text'}
-              value={gamePin}
+              value={login.gameId}
               onInput={(e) =>
-                setGamePin(
+                updateGameId(
                   (e.target as HTMLInputElement).validity.valid
                     ? (e.target as HTMLInputElement).value
-                    : gamePin
+                    : login.gameId
                 )
               }
             />
@@ -57,7 +57,7 @@ const Home: NextPage = () => {
               label={'Join game'}
               size={'large'}
               onClick={() => {
-                if (name) router.push(`/play/${gamePin}?name=${name}`)
+                if (login.name) router.push(`/play`)
               }}
             />
             <Button
@@ -74,7 +74,7 @@ const Home: NextPage = () => {
             label={'Play'}
             size={'large'}
             onClick={() => {
-              if (gamePin) setStage(1)
+              if (login.gameId) setStage(1)
             }}
           />
         )}

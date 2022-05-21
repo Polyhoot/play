@@ -211,6 +211,11 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
+"@nanostores/react@^0.2.0":
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/@nanostores/react/-/react-0.2.0.tgz#592e68672a4c7fd4abbdae79713a677dd1e89740"
+  integrity sha512-8kR6Ke8KAacAuBvodGrMNtLof8xF44WkfqtWWMZffP0TZsXEePdIWEQ6MDmCvVzbFAwOKvF71YjVAJ660NYCAw==
+
 "@next/env@12.1.6":
   version "12.1.6"
   resolved "https://registry.yarnpkg.com/@next/env/-/env-12.1.6.tgz#5f44823a78335355f00f1687cfc4f1dafa3eca08"
@@ -1536,6 +1541,11 @@ nanoid@^3.1.30:
   version "3.3.4"
   resolved "https://registry.yarnpkg.com/nanoid/-/nanoid-3.3.4.tgz#730b67e3cd09e2deacf03c027c81c9d9dbc5e8ab"
   integrity sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==
+
+nanostores@^0.5.12:
+  version "0.5.12"
+  resolved "https://registry.yarnpkg.com/nanostores/-/nanostores-0.5.12.tgz#52559ddbaddf1da7d45e2221287178f9480c5e5d"
+  integrity sha512-5BccS7nNInTc7Noz2gv19gyx5h5y6m72nj6ZnCTV98GdFdwvcFJf2MMl+7VsX76E1toV1YrLqlDn+R+OF73PVg==
 
 natural-compare@^1.4.0:
   version "1.4.0"
