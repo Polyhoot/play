@@ -11,15 +11,15 @@ const GameSwitch: React.FC = () => {
     case 'LOBBY':
       return <Lobby />
     case 'STARTING':
-      return <Section text="Starting the game!" />
+      return <Section text="Starting the game!" spinner />
     case 'GET_READY':
-      return <Section text="Get ready to answer!" />
+      return <Section text="Get ready to answer!" spinner />
     case 'QUESTION':
       return <Question />
     case 'SCORE':
       return <Score />
     case 'END':
-      return <Section text="The game was ended!" />
+      return <Section text="The game was ended!" spinner={false} />
   }
   return <></>
 }

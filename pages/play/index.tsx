@@ -83,9 +83,6 @@ const PlayPage: NextPage = () => {
 
   return (
     <Page height={'100%'} background={'neutral-2'}>
-      <Head>
-        <meta name="theme-color" content="#3D138D" />
-      </Head>
       <GameSwitch />
       <GameFooter />
     </Page>

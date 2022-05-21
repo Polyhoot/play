@@ -5,7 +5,10 @@ import { Text } from 'grommet/components/Text'
 import Head from 'next/head'
 import { loginStore } from '../../store/login'
 
-const Section: React.FC<{ text: string }> = (props: { text: string }) => {
+const Section: React.FC<{ text: string; spinner: boolean }> = (props: {
+  text: string
+  spinner: boolean
+}) => {
   return (
     <Box margin={'auto'}>
       <Head>
@@ -14,7 +17,9 @@ const Section: React.FC<{ text: string }> = (props: { text: string }) => {
       <Text weight={'bold'} size={'xxlarge'} margin={'20px auto'}>
         {props.text}
       </Text>
-      <Spinner size={'large'} color={'white'} margin={'20px auto'} />
+      {props.spinner ? (
+        <Spinner size={'large'} color={'white'} margin={'20px auto'} />
+      ) : null}
     </Box>
   )
 }
