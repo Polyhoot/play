@@ -3,7 +3,7 @@ import { Box, Page, Text } from 'grommet'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next/types'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { gameStore, updateState } from '../../store/game'
+import { gameStore, updateScore, updateState } from '../../store/game'
 import { loginStore } from '../../store/login'
 import { serverIp } from '../../utils/getServerIp'
 import { isBrowser } from '../../utils/isBrowser'
@@ -12,6 +12,7 @@ import GameFooter from '../../components/play/GameFooter'
 import Preloader from '../../components/Preloader'
 import { toast } from 'react-toastify'
 import Head from 'next/head'
+import { nextQuestion, setSocket } from '../../store/question'
 
 const PlayPage: NextPage = () => {
   const router = useRouter()
@@ -35,6 +36,7 @@ const PlayPage: NextPage = () => {
           name: login.name,
         })
       )
+      setSocket(socket)
       socket.addEventListener('message', (ev) => {
         const data = JSON.parse(ev.data)
         if (data.event === 'NAME_TAKEN') {
@@ -54,9 +56,18 @@ const PlayPage: NextPage = () => {
         if (data.event === 'GET_READY') {
           updateState('GET_READY')
         }
+        if (data.event === 'QUESTION') {
+          nextQuestion(data.duration, data.text)
+        }
+        if (data.event === 'TIME_UP') {
+          updateScore(data.score)
+        }
+        if (data.event === 'END') {
+          updateState('END')
+        }
       })
     }
-  }, [login, socket])
+  }, [login.gameId, login.name, router, socket])
 
   useEffect(() => {
     if (socket && login.gameId && login.name)
@@ -64,7 +75,7 @@ const PlayPage: NextPage = () => {
     else if (!login.gameId) {
       router.push('/')
     }
-  }, [login.gameId, login.name, socket, socketListener])
+  }, [login.gameId, login.name, router, socket, socketListener])
 
   if (loading) {
     return <Preloader color={'white'} background={'#3D138D'} />

@@ -1,14 +1,15 @@
 import { map } from 'nanostores'
+import { gameStore, updateState } from './game'
 
 type GameState = 'LOBBY' | 'STARTING' | 'GET_READY' | 'QUESTION' | 'WAITING' | 'SCORE' | 'END'
-export interface GameValue {
+export interface QuestionValue {
   number: number
   duration: number,
   text: string,
   socket: WebSocket | null,
 }
 
-export const gameStore = map<GameValue>({
+export const questionStore = map<QuestionValue>({
   number: 0,
   duration: 0,
   text: '',
@@ -16,7 +17,12 @@ export const gameStore = map<GameValue>({
 })
 
 export const nextQuestion = (duration: number, text: string) => {
-  gameStore.setKey('duration', duration)
-  gameStore.setKey('text', text)
-  gameStore.setKey('number', gameStore.get().number + 1)
+  questionStore.setKey('duration', duration)
+  questionStore.setKey('text', text)
+  questionStore.setKey('number', questionStore.get().number + 1)
+  updateState('QUESTION')
+}
+
+export const setSocket = (socket: WebSocket) => {
+  questionStore.setKey('socket', socket)
 }
