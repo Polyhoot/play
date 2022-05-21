@@ -3,6 +3,7 @@ import { Box } from 'grommet/components/Box'
 import { Page } from 'grommet/components/Page'
 import { FormField } from 'grommet/components/FormField'
 import { TextInput } from 'grommet/components/TextInput'
+import { Text } from 'grommet/components/Text'
 import { useState } from 'react'
 import type { NextPage } from 'next'
 import styles from '../styles/Home.module.scss'
@@ -10,6 +11,7 @@ import { Button } from 'grommet'
 import { useRouter } from 'next/router'
 import { useStore } from '@nanostores/react'
 import { loginStore, updateGameId, updateName } from '../store/login'
+import Head from 'next/head'
 
 const Home: NextPage = () => {
   const login = useStore(loginStore)
@@ -19,26 +21,37 @@ const Home: NextPage = () => {
   const [stage, setStage] = useState<0 | 1>(0)
 
   return (
-    <Page height={'100%'} background={'brand'} width={'100%'}>
-      <meta name="theme-color" content="#7D4CDB" />
+    <Page height={'100%'} background={'neutral-2'} width={'100%'}>
+      <Head>
+        <meta name="theme-color" content="#3D138D" />
+      </Head>
       <Box margin={'50px auto'} height={'100px'}>
         <Heading>Polyhoot!</Heading>
       </Box>
-      <Box margin={'auto'}>
+      <Box margin={'auto'} style={{ textAlign: 'center' }}>
         {stage ? (
-          <FormField label={'Enter Your name'} margin={'auto'}>
+          <FormField
+            label={<Text margin={'auto'}>Enter Your name</Text>}
+            margin={'auto'}
+          >
             <TextInput
               type={'text'}
               value={login.name}
+              placeholder={'Your name'}
               onInput={(e) => updateName((e.target as HTMLInputElement).value)}
+              textAlign={'center'}
             />
           </FormField>
         ) : (
-          <FormField label={'Enter Game Pin'} margin={'auto'}>
+          <FormField
+            label={<Text margin={'auto'}>Enter Game Pin</Text>}
+            margin={'auto'}
+          >
             <TextInput
               pattern={'[0-9]*'}
               type={'text'}
               value={login.gameId}
+              placeholder={'Game PIN'}
               onInput={(e) =>
                 updateGameId(
                   (e.target as HTMLInputElement).validity.valid
@@ -46,6 +59,7 @@ const Home: NextPage = () => {
                     : login.gameId
                 )
               }
+              textAlign={'center'}
             />
           </FormField>
         )}

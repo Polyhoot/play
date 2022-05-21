@@ -1,10 +1,12 @@
 import { useStore } from '@nanostores/react'
 import { Box } from 'grommet/components/Box'
 import { Text } from 'grommet/components/Text'
+import { gameStore } from '../../store/game'
 import { loginStore } from '../../store/login'
 
 const GameFooter: React.FC = () => {
   const { gameId, name } = useStore(loginStore)
+  const { score } = useStore(gameStore)
   return (
     <Box
       background={'light-1'}
@@ -18,7 +20,7 @@ const GameFooter: React.FC = () => {
         {name}
       </Text>
       <Text margin={'auto 40px auto auto'} weight={'bolder'}>
-        PIN: {gameId}
+        Score: {score}
       </Text>
     </Box>
   )
