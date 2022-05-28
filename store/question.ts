@@ -26,3 +26,12 @@ export const nextQuestion = (duration: number, text: string) => {
 export const setSocket = (socket: WebSocket) => {
   questionStore.setKey('socket', socket)
 }
+
+export const clearQuestionStore = () => {
+  questionStore.set({
+    number: 0,
+    duration: 0,
+    text: '',
+    socket: null
+  })
+}

@@ -9,3 +9,7 @@ export const updateTimer = () => {
 export const resetTimer = (time: number) => {
   timerStore.set(time)
 }
+
+export const clearTimerStore = () => {
+  timerStore.set(0)
+}

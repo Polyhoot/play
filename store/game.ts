@@ -22,3 +22,11 @@ export const updateScore = (score: number) => {
   gameStore.setKey('score', score)
   gameStore.setKey('state', 'SCORE')
 }
+
+export const clearGameStore = () => {
+  gameStore.set({
+    state: 'LOBBY',
+    score: 0,
+    isLastCorrect: false
+  })
+}

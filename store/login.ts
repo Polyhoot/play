@@ -16,3 +16,10 @@ export const updateName = (name: string) => {
 export const updateGameId = (id: string) => {
   loginStore.setKey('gameId', id)
 }
+
+export const clearLoginStore = () => {
+  loginStore.set({
+    name: '',
+    gameId: ''
+  })
+}

@@ -3,16 +3,16 @@ import { Box, Page, Text } from 'grommet'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next/types'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { gameStore, updateScore, updateState } from '../../store/game'
-import { loginStore } from '../../store/login'
+import { clearGameStore, gameStore, updateScore, updateState } from '../../store/game'
+import { clearLoginStore, loginStore } from '../../store/login'
 import { serverIp } from '../../utils/getServerIp'
 import { isBrowser } from '../../utils/isBrowser'
 import GameSwitch from '../../components/play/GameSwitch'
 import GameFooter from '../../components/play/GameFooter'
 import Preloader from '../../components/Preloader'
 import { toast } from 'react-toastify'
-import Head from 'next/head'
-import { nextQuestion, setSocket } from '../../store/question'
+import { clearQuestionStore, nextQuestion, setSocket } from '../../store/question'
+import { clearTimerStore } from '../../store/timer'
 
 const PlayPage: NextPage = () => {
   const router = useRouter()
@@ -76,6 +76,23 @@ const PlayPage: NextPage = () => {
       router.push('/')
     }
   }, [login.gameId, login.name, router, socket, socketListener])
+
+  useEffect(() => {
+    router.beforePopState(({ as }) => {
+        if (as !== router.asPath) {
+          clearQuestionStore()
+          clearTimerStore()
+          clearLoginStore()
+          clearGameStore()
+        }
+        return true;
+    });
+
+    return () => {
+        router.beforePopState(() => true);
+    };
+  }, [router]);
+
 
   if (loading) {
     return <Preloader color={'white'} background={'#3D138D'} />
