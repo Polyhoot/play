@@ -1,5 +1,5 @@
 import { useStore } from '@nanostores/react'
-import { Box, Page, Text } from 'grommet'
+import { Page } from 'grommet'
 import { useRouter } from 'next/router'
 import { NextPage } from 'next/types'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -18,7 +18,6 @@ const PlayPage: NextPage = () => {
   const router = useRouter()
 
   const login = useStore(loginStore)
-  const game = useStore(gameStore)
 
   const socket = useMemo(
     () => (isBrowser ? new WebSocket(`wss://${serverIp}/game/session`) : null),
