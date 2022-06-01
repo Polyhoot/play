@@ -1,10 +1,14 @@
 import { Box, Button, Page, Text } from 'grommet'
+import Head from 'next/head'
 import Link from 'next/link'
 import { NextPage } from 'next/types'
 
 const NotFoundPage: NextPage = () => {
   return (
     <Page height={'100%'}>
+      <Head>
+        <title>404 - Not Found</title>
+      </Head>
       <Box margin={'auto'}>
         <Text weight={'bold'} size={'2rem'}>
           404 - Page Not Found
