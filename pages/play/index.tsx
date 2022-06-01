@@ -83,6 +83,8 @@ const PlayPage: NextPage = () => {
           clearTimerStore()
           clearLoginStore()
           clearGameStore()
+          if (socket)
+            socket.close()
         }
         return true;
     });
@@ -90,7 +92,7 @@ const PlayPage: NextPage = () => {
     return () => {
         router.beforePopState(() => true);
     };
-  }, [router]);
+  }, [router, socket]);
 
 
   if (loading) {
