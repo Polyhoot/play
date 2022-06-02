@@ -3,7 +3,7 @@ import { Radial, Square, Trigger, Sun } from 'grommet-icons'
 import { Box } from 'grommet/components/Box'
 import { Text } from 'grommet/components/Text'
 import { useCallback, useEffect, useState } from 'react'
-import { gameStore } from '../../store/game'
+import { gameStore, updateState } from '../../store/game'
 import { loginStore } from '../../store/login'
 import { questionStore } from '../../store/question'
 import { resetTimer, updateTimer } from '../../store/timer'
@@ -49,6 +49,7 @@ const Question: React.FC = () => {
             1000 - Math.round((Date.now() - startTime) / question.duration),
         })
       )
+      updateState('WAITING')
     },
     [question.socket, question.duration, startTime]
   )

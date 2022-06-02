@@ -16,6 +16,8 @@ const GameSwitch: React.FC = () => {
       return <Section text="Get ready to answer!" spinner />
     case 'QUESTION':
       return <Question />
+    case 'WAITING':
+      return <Section text="Waiting others..." spinner />
     case 'SCORE':
       return <Score />
     case 'END':
